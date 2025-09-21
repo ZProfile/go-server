@@ -23,7 +23,7 @@ jobs:
       - name: Save repo to artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.GITHUB_REPOSITORY }}
+          name: "${{ env.GITHUB_REPOSITORY }}"
           path: .
           overwrite: true
           if-no-files-found: error
@@ -41,7 +41,7 @@ jobs:
       - name: Download repo artifact
         uses: actions/download-artifact@v5
         with:
-          name: ${{ env.GITHUB_REPOSITORY }}
+          name: "${{ env.GITHUB_REPOSITORY }}"
           path: .
 
       - name: GitGuardian scan
@@ -55,7 +55,7 @@ jobs:
 
       - name: Sonar scan
         id: sonarqube-quality-gate-check
-        uses: sonarsource/sonarcloud-github-action@v6
+        uses: sonarsource/sonarcloud-github-action@v5.0.0
 
       - name: "SonarQube Quality result"
         run: |
