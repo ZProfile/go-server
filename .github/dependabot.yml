@@ -1,0 +1,32 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+      timezone: "Europe/Sofia"
+    commit-message:
+      prefix: "[github-action] "
+    assignees:
+      - "IliyanKostov9"
+    reviewers:
+      - "IliyanKostov9"
+
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+      timezone: "Europe/Sofia"
+    commit-message:
+      prefix: "[gradle] "
+    assignees:
+      - "IliyanKostov9"
+    reviewers:
+      - "IliyanKostov9"
+    groups:
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin*"
+          - "org.sonarqube"

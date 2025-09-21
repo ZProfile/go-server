@@ -1,0 +1,44 @@
+name: Flake ❄️ Tests
+
+on:
+  schedule:
+    - cron: "0 0 1 * *"
+  workflow_dispatch:
+
+jobs:
+  flake-checker:
+    name: Flake ❄️ Checker ✅
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: DeterminateSystems/nix-installer-action@v20
+      - uses: cachix/cachix-action@v16
+        with:
+          name: zz-go-server
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - uses: DeterminateSystems/flake-checker-action@v12
+
+  lock-updater:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    name: Flake ❄️ Lock 🔒️ Updater ✨
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: DeterminateSystems/nix-installer-action@v20
+      - uses: cachix/cachix-action@v16
+        with:
+          name: zz-go-server
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - uses: DeterminateSystems/update-flake-lock@v27
+        with:
+          pr-title: "chore: update flake.lock"
+          pr-labels: |
+            dependencies
+            automated
