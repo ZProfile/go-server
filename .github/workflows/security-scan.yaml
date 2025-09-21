@@ -23,7 +23,7 @@ jobs:
       - name: Save repo to artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "${{ env.GITHUB_REPOSITORY }}"
+          name: "${{ github.event.pull_request.head.repo.full_name }}"
           path: .
           overwrite: true
           if-no-files-found: error
@@ -41,7 +41,7 @@ jobs:
       - name: Download repo artifact
         uses: actions/download-artifact@v5
         with:
-          name: "${{ env.GITHUB_REPOSITORY }}"
+          name: "${{ github.event.pull_request.head.repo.full_name }}"
           path: .
 
       - name: GitGuardian scan
