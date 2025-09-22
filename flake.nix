@@ -46,9 +46,9 @@
             sslCertificate = null;
             sslCertificateKey = null;
             realms.zprofile = {
-              # path = "./keycloak/realms/zprofile.json";
-              # import = true;
-              # export = true;
+              path = "./keycloak/realms/zprofile.json";
+              import = true;
+              export = true;
             };
             settings = {
               hostname = "localhost";
@@ -69,6 +69,10 @@
             devenvRootFileContent = builtins.readFile devenv-root.outPath;
           in
             pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
+
+          packages = with pkgs; [
+            sops
+          ];
         };
       };
     };
