@@ -40,6 +40,23 @@
           name = "Go server for ZProfile";
           languages.go.enable = true;
 
+          services.keycloak = {
+            enable = true;
+            initialAdminPassword = "admin";
+            sslCertificate = null;
+            sslCertificateKey = null;
+            realms.zprofile = {
+              path = "./keycloak/realms/zprofile.json";
+              import = true;
+              export = true;
+            };
+            settings = {
+              hostname = "localhost";
+              http-port = 8080;
+              http-enabled = true;
+            };
+          };
+
           # NOTE: First do devenv shell
           git-hooks.hooks = {
             actionlint = {
@@ -54,11 +71,8 @@
             pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
 
           packages = with pkgs; [
-            # hello
+            sops
           ];
-          enterShell = ''
-            export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
-          '';
         };
       };
     };
