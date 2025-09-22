@@ -1,3 +1,5 @@
+REALM_NAME := zprofile
+
 ###############
 # TARGETS
 ###############
@@ -22,3 +24,6 @@ stop: ## Stop keycloak
 keycloak-attach:
 	process-compose attach
 
+.PHONY: decrypt
+decrypt: ## Decrypt the exported realm file
+	sops -d ./keycloak/realms/zprofile.enc.json > ./keycloak/realms/zprofile.json 
