@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Save repo to artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: "${{ env.REPOSITORY }}"
           path: .
