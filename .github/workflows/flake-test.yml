@@ -18,7 +18,7 @@ jobs:
         with:
           name: zz-go-server
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - uses: DeterminateSystems/flake-checker-action@v12
+      - uses: DeterminateSystems/flake-checker-action@v13
 
   lock-updater:
     permissions:
